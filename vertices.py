@@ -16,8 +16,6 @@ class Vertex(Sprite):
 
         self.rect = pygame.Rect(0, 0, self.size, self.size)
 
-
-
     def draw_vertex(self):
         """Draw the vertex on the screen."""
         pygame.draw.rect(self.screen, self.color, self.rect)

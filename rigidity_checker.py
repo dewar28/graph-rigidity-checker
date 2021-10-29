@@ -62,7 +62,7 @@ class RigidityChecker(Graph):
         n = self.number_of_vertices()
         m = self.number_of_edges()
         if n < self.dimension + 1:
-            if 2*m == n*(n-1):
+            if 2 * m == n * (n - 1):
                 print(f"Graph is minimally rigid in dimension {self.dimension}.")
             else:
                 print(f"Graph is independent and flexible in dimension {self.dimension}.")
@@ -74,7 +74,6 @@ class RigidityChecker(Graph):
             print(f"Graph is dependent and rigid in dimension {self.dimension}.")
         elif (self.independent is False) and (self.rigid is False):
             print(f"Graph is dependent and flexible in dimension {self.dimension}. Rerun to double check.")
-
 
 
 class GlobalRigidityChecker(RigidityChecker):
@@ -128,7 +127,7 @@ class GlobalRigidityChecker(RigidityChecker):
         n = self.number_of_vertices()
         m = self.number_of_edges()
         if n < self.dimension + 1:
-            if 2*m == n*(n-1):
+            if 2 * m == n * (n - 1):
                 print(f"Graph is globally rigid in dimension {self.dimension}.")
             else:
                 print(f"Graph is not globally rigid in dimension {self.dimension}.")
@@ -140,4 +139,3 @@ class GlobalRigidityChecker(RigidityChecker):
             print(f"Graph is globally rigid in dimension {self.dimension}.")
         else:
             print(f"Graph is not globally rigid in dimension {self.dimension}. Rerun to double check.")
-

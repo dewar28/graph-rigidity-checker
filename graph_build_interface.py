@@ -1,10 +1,11 @@
 import sys
 import os
-os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
-
 from vertices import Vertex
 from rigidity_checker import GlobalRigidityChecker
+
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+
 
 class GraphBuilder:
 
@@ -55,7 +56,7 @@ class GraphBuilder:
                 self._check_mouse_click(event, mouse_pos)
             elif event.type == pygame.KEYDOWN:
                 mouse_pos = pygame.mouse.get_pos()
-                self._check_keydown_events(event,mouse_pos)
+                self._check_keydown_events(event, mouse_pos)
 
     def _check_keydown_events(self, event, mouse_pos):
         """Responds when button is pressed."""
@@ -110,22 +111,19 @@ class GraphBuilder:
             self.remove_edge = set()
             print(f"\nGraph reset.\nDimension: {self.graph.dimension}.")
 
-
-
     def _check_mouse_click(self, event, mouse_pos):
-        if event.button == 1: # Left click
+        if event.button == 1:  # Left click
             mouse_pos_x = mouse_pos[0]
             mouse_pos_y = mouse_pos[1]
             self._create_vertex(mouse_pos_x, mouse_pos_y)
-
 
     def _create_vertex(self, mouse_pos_x, mouse_pos_y):
         # Create a vertex and place it correctly.
         vertex = Vertex(self)
         vertex.name = len(self.vertices)
         self.graph.add_vertex()
-        vertex.rect.x = mouse_pos_x - vertex.size/2
-        vertex.rect.y = mouse_pos_y - vertex.size/2
+        vertex.rect.x = mouse_pos_x - vertex.size / 2
+        vertex.rect.y = mouse_pos_y - vertex.size / 2
 
         self.vertices.add(vertex)
 
@@ -140,15 +138,14 @@ class GraphBuilder:
             for vertex_1 in self.vertices:
                 for vertex_2 in self.vertices:
                     if edge == {vertex_1.name, vertex_2.name}:
-                        pygame.draw.line(self.screen, (0,0,0),
-                                         (vertex_1.rect.x + vertex.size/2, vertex_1.rect.y + vertex.size/2),
-                                         (vertex_2.rect.x + vertex.size/2, vertex_2.rect.y + vertex.size/2), 10)
+                        pygame.draw.line(self.screen, (0, 0, 0),
+                                         (vertex_1.rect.x + vertex.size / 2, vertex_1.rect.y + vertex.size / 2),
+                                         (vertex_2.rect.x + vertex.size / 2, vertex_2.rect.y + vertex.size / 2), 10)
 
         # Make most recently drawn screen visible.
         pygame.display.flip()
 
+
 if __name__ == "__main__":
     gb = GraphBuilder()
     gb.run_game()
-
-

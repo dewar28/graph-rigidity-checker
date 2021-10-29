@@ -52,7 +52,6 @@ class Graph:
         else:
             self.adjacency_list[0] = set()
 
-
     def add_edge(self, edge):
         """Adds an edge of the form {i,j}.
         Edge will be rejected if endpoints are not in the graph."""

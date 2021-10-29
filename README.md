@@ -1,4 +1,4 @@
-# graph_rigidity_checker
+# graph-rigidity-checker
 A simple user-friendly Python program for checking if a graph is rigid and globally rigid.
 It can also check the adjacency and Laplacian matrix eigenvalues.
 

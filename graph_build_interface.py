@@ -27,7 +27,7 @@ class GraphBuilder:
 
     def run_game(self):
         """Start the main loop of the game."""
-        print("\nWelcome to Rigidity Checker!")
+        print("\nWelcome to Graph Rigidity Checker!")
         print("Instructions:")
         print("1. Click to place a vertex.")
         print("2. Press space when mouse is over vertex to begin an edge, "

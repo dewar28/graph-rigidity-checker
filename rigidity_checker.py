@@ -45,19 +45,19 @@ class RigidityChecker(Graph):
                             -rigidity_matrix[self.edge_list().index(e)][self.dimension * min(e) + k]
         return rigidity_matrix
 
-    def rank_check(self):
-        if matrix_rank(self.random_rigidity_matrix()) == self.number_of_edges():
+    def rank_check(self, matrix):
+        if matrix_rank(matrix) == self.number_of_edges():
             self.independent = True
         else:
             self.independent = False
-        if matrix_rank(self.random_rigidity_matrix()) == self.dimension * self.number_of_vertices() - \
+        if matrix_rank(matrix) == self.dimension * self.number_of_vertices() - \
                 (self.dimension * (self.dimension + 1) / 2):
             self.rigid = True
         else:
             self.rigid = False
 
     def rigidity_check(self):
-        self.rank_check()
+        self.rank_check(self.random_rigidity_matrix())
         print("")
         n = self.number_of_vertices()
         m = self.number_of_edges()
@@ -84,8 +84,8 @@ class GlobalRigidityChecker(RigidityChecker):
         self.globally_rigid = False
         self.globally_rigid_test_fail = False
 
-    def random_stress(self):
-        r2 = np.transpose(self.random_rigidity_matrix())
+    def random_stress(self, matrix):
+        r2 = np.transpose(matrix)
         ns = null_space(r2)
 
         if ns.size != 0:
@@ -98,8 +98,7 @@ class GlobalRigidityChecker(RigidityChecker):
             stress = np.zeros((self.number_of_edges(), 1))
         return stress
 
-    def stress_matrix(self):
-        stress = self.random_stress()
+    def stress_matrix(self, stress):
         stress_matrix = np.zeros((self.number_of_vertices(), self.number_of_vertices()))
         for v in range(self.number_of_vertices()):
             for w in range(self.number_of_vertices()):
@@ -110,8 +109,8 @@ class GlobalRigidityChecker(RigidityChecker):
                         stress_matrix[v][w] = -stress[self.edge_list().index(e)]
         return stress_matrix
 
-    def stress_rank_check(self):
-        stress_matrix = self.stress_matrix()
+    def stress_rank_check(self, stress):
+        stress_matrix = self.stress_matrix(stress)
         rank = matrix_rank(stress_matrix)
         if rank == self.number_of_vertices() - self.dimension - 1:
             self.globally_rigid = True
@@ -121,8 +120,10 @@ class GlobalRigidityChecker(RigidityChecker):
             self.globally_rigid = False
 
     def global_rigidity_check(self):
-        self.rank_check()
-        self.stress_rank_check()
+        rigidity_matrix = self.random_rigidity_matrix()
+        self.rank_check(rigidity_matrix)
+        stress = self.random_stress(rigidity_matrix)
+        self.stress_rank_check(stress)
         print("")
         n = self.number_of_vertices()
         m = self.number_of_edges()

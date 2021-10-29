@@ -10,5 +10,5 @@ To check whether your graph is rigid, the program generates a random realisation
 To check whether your graph is globally rigid, the program generates a random realisation of your desired graph,
 finds a random stress of the realisation and then checks whether the realisation is both infinitesimally rigid and the stress has the correct rank.
 
-The graph will be described as a dictionary in the terminal window every time an edge is added to the graph.
+The graph will be described as a dictionary object in the terminal window every time an edge is added to the graph.
 This can then be directly copied into other Python scripts easily.

@@ -3,7 +3,7 @@ from numpy import linalg as la
 
 
 class Graph:
-    """Entries should be dictionaries. Keys should be numbers 1,...,n and values should be subsets of 1,...,n.
+    """Entries should be dictionaries. Keys should be numbers 0,...,n and values should be subsets of 0,...,n.
     Graphs will be simple graphs.
     Dictionary will be made symmetric."""
 

@@ -39,7 +39,8 @@ class GraphBuilder:
         print("6. Use the up and down keys to change the dimension (dimension is currently set to 2).")
         print("7. Press l to get the approximate Laplacian eigenvalues "
               "and press a to get the approximate adjacency matrix eigenvalues.")
-        print("8. Press w to reset everything.")
+        print("8. Press n to get the graph's number representation.")
+        print("9. Press w to reset everything.")
         while True:
             self._check_events()
 
@@ -96,6 +97,8 @@ class GraphBuilder:
             print(f"\nThe Laplacian matrix eigenvalues are:\n{self.graph.laplacian_eigenvalues()}.")
         elif event.key == pygame.K_a and self.graph.adjacency_list and self.graph.edge_list():
             print(f"\nThe adjacency matrix eigenvalues are:\n{self.graph.adjacency_eigenvalues()}.")
+        elif (event.key == pygame.K_n) and self.graph.adjacency_list and self.graph.edge_list():
+            print(f"\nThe graph's number representation is:\n{self.graph.graph_number()}.")
         elif event.key == pygame.K_DOWN:
             if self.graph.dimension > 1:
                 self.graph.dimension_decrease()

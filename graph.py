@@ -97,6 +97,23 @@ class Graph:
         eigenvalues.sort()
         return eigenvalues
 
+    def graph_number(self):
+        """Obtains the number representation of the graph as described in:
+        'The number of realizations of all Laman graphs with at most 12 vertices',
+        Jose Capco, Matteo Gallet, Georg Grasegger, Christoph Koutschan, Niels Lubbes, Josef Schicho,
+        10.5281/zenodo.1245517"""
+        graph_number = 0
+        n = self.number_of_vertices()
+        for vertex in self.adjacency_list:
+            count = n*(n-1)//2
+            if vertex > 0:
+                for i in range(vertex):
+                    count -= n-i-1
+            for neighbour in self.adjacency_list[vertex]:
+                if vertex < neighbour:
+                    graph_number += 2**(count - neighbour + vertex)
+        return graph_number
+
 
 class GraphWithOrientation(Graph):
     """A Graph with an added orientation to the edges, represented by dictionary.

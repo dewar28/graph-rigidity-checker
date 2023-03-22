@@ -14,3 +14,8 @@ finds a random stress of the realisation and then checks whether the realisation
 
 The graph will be described as a dictionary object in the terminal window every time an edge is added to the graph.
 This can then be directly copied into other Python scripts easily.
+
+FEATURE UPDATE 22/3/2023:
+Program can now compute the drawn graph's number representation as described in
+'The number of realizations of all Laman graphs with at most 12 vertices' 
+by Jose Capco, Matteo Gallet, Georg Grasegger, Christoph Koutschan, Niels Lubbes and Josef Schicho (DOI: 10.5281/zenodo.1245517).

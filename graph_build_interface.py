@@ -27,20 +27,20 @@ class GraphBuilder:
 
     def run_game(self):
         """Start the main loop of the game."""
-        print("\nWelcome to Graph Rigidity Checker!")
-        print("Instructions:")
-        print("1. Click to place a vertex.")
+        print("\nWelcome to Graph Rigidity Checker!", flush=True)
+        print("Instructions:", flush=True)
+        print("1. Click to place a vertex.", flush=True)
         print("2. Press space when mouse is over vertex to begin an edge, "
-              "and press again over another vertex to connect them by an edge.")
+              "and press again over another vertex to connect them by an edge.", flush=True)
         print("3. Delete edges by pressing backspace when the mouse is over the first endpoint, "
-              "then again when it is over the second endpoint.")
-        print("4. Press c to cancel drawing/deleting an edge.")
-        print("5. Press r to check rigidity in 2D, and press g to check global rigidity in 2D.")
-        print("6. Use the up and down keys to change the dimension (dimension is currently set to 2).")
+              "then again when it is over the second endpoint.", flush=True)
+        print("4. Press c to cancel drawing/deleting an edge.", flush=True)
+        print("5. Press r to check rigidity in 2D, and press g to check global rigidity in 2D.", flush=True)
+        print("6. Use the up and down keys to change the dimension (dimension is currently set to 2).", flush=True)
         print("7. Press l to get the approximate Laplacian eigenvalues "
-              "and press a to get the approximate adjacency matrix eigenvalues.")
-        print("8. Press n to get the graph's number representation.")
-        print("9. Press w to reset everything.")
+              "and press a to get the approximate adjacency matrix eigenvalues.", flush=True)
+        print("8. Press n to get the graph's number representation.", flush=True)
+        print("9. Press w to reset everything.", flush=True)
         while True:
             self._check_events()
 
@@ -50,7 +50,7 @@ class GraphBuilder:
         """We are asking it to watch keyboard and mouse commands."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                print(f"\nAdjacency list: {self.graph.adjacency_list}.")
+                print(f"\nAdjacency list: {self.graph.adjacency_list}.", flush=True)
                 sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
@@ -62,7 +62,7 @@ class GraphBuilder:
     def _check_keydown_events(self, event, mouse_pos):
         """Responds when button is pressed."""
         if event.key == pygame.K_q:
-            print(f"\nAdjacency list: {self.graph.adjacency_list}.")
+            print(f"\nAdjacency list: {self.graph.adjacency_list}.", flush=True)
             sys.exit()
         elif event.key == pygame.K_SPACE:
             for vertex in self.vertices:
@@ -72,7 +72,7 @@ class GraphBuilder:
             if len(self.new_edge) == 2:
                 self.graph.add_edge(self.new_edge)
                 self.new_edge = set()
-                print(f"\nAdjacency list: {self.graph.adjacency_list}.")
+                print(f"\nAdjacency list: {self.graph.adjacency_list}.", flush=True)
             elif len(self.new_edge) > 2:
                 self.new_edge = set()
         elif event.key == pygame.K_BACKSPACE:
@@ -83,7 +83,7 @@ class GraphBuilder:
             if len(self.remove_edge) == 2:
                 self.graph.delete_edge(self.remove_edge)
                 self.remove_edge = set()
-                print(f"\nAdjacency list: {self.graph.adjacency_list}.")
+                print(f"\nAdjacency list: {self.graph.adjacency_list}.", flush=True)
             elif len(self.remove_edge) > 2:
                 self.remove_edge = set()
         elif event.key == pygame.K_c:
@@ -94,25 +94,25 @@ class GraphBuilder:
         elif event.key == pygame.K_g and self.graph.adjacency_list and self.graph.edge_list():
             self.graph.global_rigidity_check()
         elif event.key == pygame.K_l and self.graph.adjacency_list and self.graph.edge_list():
-            print(f"\nThe Laplacian matrix eigenvalues are:\n{self.graph.laplacian_eigenvalues()}.")
+            print(f"\nThe Laplacian matrix eigenvalues are:\n{self.graph.laplacian_eigenvalues()}.", flush=True)
         elif event.key == pygame.K_a and self.graph.adjacency_list and self.graph.edge_list():
-            print(f"\nThe adjacency matrix eigenvalues are:\n{self.graph.adjacency_eigenvalues()}.")
+            print(f"\nThe adjacency matrix eigenvalues are:\n{self.graph.adjacency_eigenvalues()}.", flush=True)
         elif (event.key == pygame.K_n) and self.graph.adjacency_list and self.graph.edge_list():
-            print(f"\nThe graph's number representation is:\n{self.graph.graph_number()}.")
+            print(f"\nThe graph's number representation is:\n{self.graph.graph_number()}.", flush=True)
         elif event.key == pygame.K_DOWN:
             if self.graph.dimension > 1:
                 self.graph.dimension_decrease()
-                print(f"\nDimension: {self.graph.dimension}.")
+                print(f"\nDimension: {self.graph.dimension}.", flush=True)
         elif event.key == pygame.K_UP:
             self.graph.dimension_increase()
-            print(f"\nDimension: {self.graph.dimension}.")
+            print(f"\nDimension: {self.graph.dimension}.", flush=True)
         elif event.key == pygame.K_w:
             d = self.graph.dimension
             self.vertices = pygame.sprite.Group()
             self.graph = GlobalRigidityChecker({}, d)
             self.new_edge = set()
             self.remove_edge = set()
-            print(f"\nGraph reset.\nDimension: {self.graph.dimension}.")
+            print(f"\nGraph reset.\nDimension: {self.graph.dimension}.", flush=True)
 
     def _check_mouse_click(self, event, mouse_pos):
         if event.button == 1:  # Left click

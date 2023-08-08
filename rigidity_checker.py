@@ -63,17 +63,17 @@ class RigidityChecker(Graph):
         m = self.number_of_edges()
         if n < self.dimension + 1:
             if 2 * m == n * (n - 1):
-                print(f"Graph is minimally rigid in dimension {self.dimension}.")
+                print(f"Graph is minimally rigid in dimension {self.dimension}.", flush=True)
             else:
-                print(f"Graph is independent and flexible in dimension {self.dimension}.")
+                print(f"Graph is independent and flexible in dimension {self.dimension}.", flush=True)
         elif (self.independent is True) and (self.rigid is True):
-            print(f"Graph is minimally rigid in dimension {self.dimension}.")
+            print(f"Graph is minimally rigid in dimension {self.dimension}.", flush=True)
         elif (self.independent is True) and (self.rigid is False):
-            print(f"Graph is independent and flexible in dimension {self.dimension}.")
+            print(f"Graph is independent and flexible in dimension {self.dimension}.", flush=True)
         elif (self.independent is False) and (self.rigid is True):
-            print(f"Graph is dependent and rigid in dimension {self.dimension}.")
+            print(f"Graph is dependent and rigid in dimension {self.dimension}.", flush=True)
         elif (self.independent is False) and (self.rigid is False):
-            print(f"Graph is dependent and flexible in dimension {self.dimension}. Rerun to double check.")
+            print(f"Graph is dependent and flexible in dimension {self.dimension}. Rerun to double check.", flush=True)
 
 
 class GlobalRigidityChecker(RigidityChecker):
@@ -128,14 +128,14 @@ class GlobalRigidityChecker(RigidityChecker):
         m = self.number_of_edges()
         if n < self.dimension + 1:
             if 2 * m == n * (n - 1):
-                print(f"Graph is globally rigid in dimension {self.dimension}.")
+                print(f"Graph is globally rigid in dimension {self.dimension}.", flush=True)
             else:
-                print(f"Graph is not globally rigid in dimension {self.dimension}.")
+                print(f"Graph is not globally rigid in dimension {self.dimension}.", flush=True)
         elif self.globally_rigid_test_fail is True:
-            print(f"Test failed: rank is too high.")
+            print(f"Test failed: rank is too high.", flush=True)
         elif (self.rigid is True) and (self.number_of_vertices() <= self.dimension + 1):
-            print(f"Graph is globally rigid in dimension {self.dimension}.")
+            print(f"Graph is globally rigid in dimension {self.dimension}.", flush=True)
         elif (self.globally_rigid is True) and (self.rigid is True):
-            print(f"Graph is globally rigid in dimension {self.dimension}.")
+            print(f"Graph is globally rigid in dimension {self.dimension}.", flush=True)
         else:
-            print(f"Graph is not globally rigid in dimension {self.dimension}. Rerun to double check.")
+            print(f"Graph is not globally rigid in dimension {self.dimension}. Rerun to double check.", flush=True)

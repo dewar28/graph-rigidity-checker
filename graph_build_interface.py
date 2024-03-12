@@ -1,6 +1,7 @@
 import sys
 import os
 import pygame
+import lnumber as ln
 from vertices import Vertex
 from rigidity_checker import GlobalRigidityChecker
 
@@ -40,7 +41,8 @@ class GraphBuilder:
         print("7. Press l to get the approximate Laplacian eigenvalues "
               "and press a to get the approximate adjacency matrix eigenvalues.", flush=True)
         print("8. Press n to get the graph's number representation.", flush=True)
-        print("9. Press w to reset everything.", flush=True)
+        print("9. Press t to get the graph's 2D realisation numbers (only when minimally rigid in 2D).", flush=True)
+        print("10. Press w to reset everything.", flush=True)
         while True:
             self._check_events()
 
@@ -99,6 +101,20 @@ class GraphBuilder:
             print(f"\nThe adjacency matrix eigenvalues are:\n{self.graph.adjacency_eigenvalues()}.", flush=True)
         elif (event.key == pygame.K_n) and self.graph.adjacency_list and self.graph.edge_list():
             print(f"\nThe graph's number representation is:\n{self.graph.graph_number()}.", flush=True)
+        elif (event.key == pygame.K_t) and self.graph.adjacency_list and self.graph.edge_list():
+            graph_num = self.graph.graph_number()
+            vertex_num = self.graph.number_of_vertices()
+            edge_num = self.graph.number_of_edges()
+            sphere_realisations = ln.lnumbers(graph_num) // 2
+            planar_realisations = ln.lnumber(graph_num) // 2
+            if vertex_num == 2 and edge_num == 1:
+                print(f"\nNumber of spherical realisations of graph: \n1")
+                print(f"\nNumber of planar realisations of graph: \n1", flush=True)
+            elif sphere_realisations == 0:
+                print("Graph is not minimally rigid in 2D", flush=True)
+            else:
+                print(f"\nNumber of spherical realisations of graph: \n{sphere_realisations}")
+                print(f"\nNumber of planar realisations of graph: \n{planar_realisations}", flush=True)
         elif event.key == pygame.K_DOWN:
             if self.graph.dimension > 1:
                 self.graph.dimension_decrease()
